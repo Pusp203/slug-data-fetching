@@ -13,6 +13,8 @@ import Posts from "./components/postdetails/posts";
 import Header from "./components/header/Header";
 import Datas from "./components/practice/Datas";
 import Details from "./components/practice/Details";
+import Fetch from "./components/practice/Fetch";
+
 function App() {
   return (
     <div className="App">
@@ -22,11 +24,12 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
           {/* <Route path="/cart" element={<Cart />} /> */}
-          <Route path="/" element={<DataFetching />} />
-          <Route path="/post/:id" element={<PostDetails />} />
-          <Route path="/posts" element={<Posts />} />
-          {/* <Route path="/post" element={<DataFetching />} /> */}
-          {/* <Route path="/" element={<Datas />} /> */}
+          {/* <Route path="/" element={<DataFetching />} /> */}
+          {/* <Route path="/post/:id" element={<PostDetails />} />
+          <Route path="/posts" element={<Posts />} /> */}
+          {/*  <Route path="/post" element={<DataFetching />} /> */}
+          <Route path="/data" element={<Datas />} />
+          <Route path="/fetch" element={<Fetch />} />
           {/* <Route path="/:id" element={<Details />} /> */}
         </Routes>
         {/* <Link to="/">Home</Link> */}

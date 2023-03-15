@@ -24,7 +24,7 @@ const Details = () => {
   return (
     <div>
       {post.id}
-      {post.userId}
+      {post.name}
       {post.body}
     </div>
   );

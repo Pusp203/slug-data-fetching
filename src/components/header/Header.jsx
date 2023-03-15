@@ -8,11 +8,13 @@ const Header = () => {
     <nav>
       <h2>logo here</h2>
       <div>
-        <Link to={"/"}>Home</Link>
-        <Link to={"/cart"}>
+        {/* <Link to={"/"}>Home</Link> */}
+        {/* <Link to={"/cart"}>
           <FiShoppingBag /> <p>0</p>
-        </Link>
-        <Link to="/posts">posts</Link>
+        </Link>*/}
+        {/* <Link to="/posts">posts</Link> */}
+        <Link to="/data">post</Link>
+        <Link to="/fetch">data</Link>
       </div>
     </nav>
   );

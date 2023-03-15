@@ -20,13 +20,13 @@ const DataFetching = () => {
   const [isClick, setIsClick] = useState();
 
   const handlesClick = (val) => {
-    // console.log(val, "val");
+    console.log(val, "val");
     history(`/?q=${val}`);
   };
 
   let query = useQuery();
   const slug = query.get("q");
-  // console.log("slug", slug);
+  console.log("slug", slug);
 
   // will run after slug value is there in query i.e http://localhost:5173/?q=2 which means q will be equivalent to slug
   useEffect(() => {
@@ -48,6 +48,7 @@ const DataFetching = () => {
     axios
       .get("https://jsonplaceholder.typicode.com/posts")
       .then((res) => {
+        console.log(res, "res");
         setPosts(res.data);
         setIsLoading(false);
       })
@@ -79,7 +80,7 @@ const DataFetching = () => {
         )}
       </div>
 
-      <div className="post-details">
+      {/* <div className="post-details">
         <div>
           {loading ? (
             <p>LOADING...</p>
@@ -95,7 +96,7 @@ const DataFetching = () => {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

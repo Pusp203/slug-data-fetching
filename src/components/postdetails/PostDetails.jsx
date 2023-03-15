@@ -6,11 +6,11 @@ import { useParams } from "react-router-dom";
 const PostDetails = () => {
   const [post, setPost] = useState({});
 
-  // console.log("post:", post);
+  console.log("post:", post);
   const { id } = useParams();
   // console.log("params", useParams());
   // console.log("setPost:", setPost);
-  // console.log("id:", id);
+  console.log("id:", id);
   // console.log("useParams:", useParams);
   // let query = useQuery();
   // const slug = query.get("slug");

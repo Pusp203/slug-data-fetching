@@ -11,14 +11,10 @@ import Pagination from "./Pagination";
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [isClick, setIsClick] = useState();
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [postsPerPage] = useState(10);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
-  // const handleClick = (val) => {
-  //   setIsClick(val);
-  // };
+
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/posts")

@@ -1,46 +1,98 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 const Datas = () => {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isClick, setIsClick] = useState();
+  let history = useNavigate();
+  const [inputs, setInputs] = useState("");
+  // console.log(value);
+  const [data, setData] = useState([]);
+  // const [isClick, setIsClick] = useState();
+
+  // const handlesClick = (val) => {
+  //   console.log(val, "val");
+  //   // history(`/?q=${val}`);
+  // };
+
+  let query = useQuery();
+  const slug = query.get("q");
+  // console.log(slug, "slug");
   useEffect(() => {
-    async function callApi() {
-      setIsLoading(true);
-      try {
-        const apiResult = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts"
-        );
-        setPosts(apiResult.data);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
-      } catch (error) {
-        console.log(error);
-        alert("something went wrong");
-        setIsLoading(false);
-      }
+    if (slug) {
+      // console.log("first", slug);
+      axios
+        .get(
+          `https://phpstack-919742-3192643.cloudwaysapps.com/api/categories?q=${slug}`
+        )
+        .then((res) => {
+          // console.log("first", res.data.data);
+
+          setData(res.data.data);
+        });
     }
-    callApi();
-  }, []);
+  }, [slug]);
+  console.log(data);
+
+  // useEffect(() => {
+  //   if (slug) {
+  //     axios
+  //       .get(
+  //         `https://phpstack-919742-3192643.cloudwaysapps.com/api/search/${slug}`
+  //       )
+  //       .then((res) => {
+  //         // setInputs(res.data);
+  //       });
+  //   }
+  // }, [slug]);
+
+  // useEffect(() => {
+  //   async function callApi() {
+  //     try {
+  //       const apiResult = await axios.get(
+  //         "https://phpstack-919742-3192643.cloudwaysapps.com/api/search"
+  //       );
+  //       console.log(apiResult, "apiresult");
+  //       setData(apiResult.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //       alert("something went wrong");
+  //     }
+  //   }
+  //   callApi();
+  // }, []);
+  // const handleChange = (e) => {
+  //   setValue(e.target.value);
+  //   // console.log(e.target.value);
+  // };
+  const handleClick = (e) => {
+    e.preventDefault();
+    history(`?q=${inputs}`);
+  };
 
   return (
     <div>
-      {isLoading ? (
-        <p>Loadingggggggggg....</p>
-      ) : (
-        <div>
-          {posts.map((val) => {
-            return (
-              <div key={val.id}>
-                {" "}
-                <Link to={`/:id`}> {val.title}</Link>{" "}
-              </div>
-            );
-          })}
-        </div>
-      )}
+      {data.map((vals) => {
+        return (
+          <div key={vals.id}>
+            {vals.name}
+            <img src={vals.image.image} />{" "}
+          </div>
+        );
+      })}
+      <form action="" onSubmit={handleClick}>
+        <input
+          type="text"
+          value={inputs}
+          onChange={(e) => setInputs(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
     </div>
   );
 };
